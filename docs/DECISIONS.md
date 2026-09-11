@@ -37,13 +37,17 @@ Status values: **Agreed** · **Provisional** (accepted but awaiting a specific v
 ---
 
 ## D2a — Stick arrangement
-**Date:** — · **Status:** **Open**
+**Date:** — · **Status:** **Open (deferred by D9)**
 
-**Question:** Symmetric sticks (both low, PlayStation style) or offset sticks (left stick high-outer with the D-pad below, Xbox style)?
+**Question:** Symmetric sticks (both low, PlayStation style) or offset sticks
+(left stick high-outer with the D-pad below, Xbox style)?
 
-**Why it is not cosmetic:** It sets the PCB outline, the grip angle, and how far the ~5-inch screen pushes the controls outward.
+**Why it is not cosmetic:** It sets the PCB outline, the grip angle, and how far
+the ~5-inch screen pushes the controls outward.
 
-**Closes when:** Both team members have held the full-scale physical mockup in both arrangements and chosen one. Decision recorded here before any PCB outline work begins.
+**Closes when:** The physical ergonomic validation required by D9 has been
+performed and both team members have chosen an arrangement. Recorded here before
+any main PCB outline work begins.
 
 ---
 
@@ -134,3 +138,71 @@ Status values: **Agreed** · **Provisional** (accepted but awaiting a specific v
 **Reason:** Design decisions and test evidence are the parts of a hardware project most easily lost. Recording them from the start also produces the final documentation almost for free.
 
 **Affects:** All future work and all Claude Code interaction with this repository.
+
+---
+
+## D9 — Ergonomic validation deferred to a pre-PCB mechanical gate
+**Date:** 2026-09-10 · **Status:** Agreed
+
+**Decision:** The cardboard/full-scale mockup is not built during Stage 1. All
+mechanical geometry is explicitly provisional and unfrozen: overall dimensions,
+stick arrangement, stick/D-pad/ABXY/Start/Select/Profile positions, shoulder and
+trigger geometry, screen placement, and enclosure geometry.
+
+Physical ergonomic validation remains **mandatory**. It moves to a dedicated
+mechanical gate that must complete before any main PCB outline, control mounting
+position, or enclosure geometry becomes irreversible. Method is the team's choice
+at that time: 1:1 printed layout, rough CAD, rough printed shell, partial printed
+controller face, or another physical prototype.
+
+**Hard rule:** The main controller PCB must not be ordered with final stick and
+button positions until that validation has been performed and logged in
+`TEST-LOG.md`.
+
+**Reason:** This is a change to the development process, not to the product
+architecture. The Stage 2 electrical prototype proves controls -> MCU -> firmware
+-> USB -> Windows, which is independent of physical arrangement, so mechanical
+work is not on its critical path. The ergonomic risk is unchanged and is
+controlled at the point where it actually becomes irreversible.
+
+**Unchanged by this decision:** the control inventory (D2) remains frozen at 15
+digital inputs and 6 analog channels, and the ~5-inch touchscreen remains a core
+V1 feature as a separate subsystem.
+
+**Affects:** Stage plan (D10), D2a, `CONTROL-INVENTORY.md`, enclosure and PCB
+outline scheduling.
+
+---
+
+## D10 — Stage plan revision
+**Date:** 2026-09-10 · **Status:** Proposed — accepted on merge of this change
+
+**Decision:** Merge the original Stage 2 (input prototype) and Stage 3 (USB HID
+firmware) into a single Stage 2, "Controller input + USB HID prototype", and
+renumber the remaining stages. Insert the D9 ergonomic validation gate explicitly
+as Stage 6, before main PCB design.
+
+**Reason:** A GPIO read with no host output cannot be meaningfully verified, so
+splitting the input path from the HID path created a stage with no observable
+definition of done. Merging them gives Stage 2 a real pass/fail. The renumbering
+also places the mandatory ergonomic gate immediately before the stage it protects.
+
+**Revised stage list:**
+1. Project definition (closed 2026-09-10)
+2. Controller input + USB HID prototype  <- ACTIVE
+3. Display subsystem prototype
+4. Companion application prototype + configuration protocol
+5. Practice PCB
+6. Mechanical/ergonomic validation + main PCB requirements and pin map
+7. Main PCB design
+8. PCB assembly and bring-up
+9. Firmware V1
+10. Companion application V1
+11. Enclosure
+12. System integration
+13. Optional features
+14. Final validation
+15. Documentation and demo
+
+**Affects:** `CLAUDE.md` section 7, `README.md` stage table, all future stage
+references.

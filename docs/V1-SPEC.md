@@ -1,6 +1,7 @@
 # V1 Specification
 
-**Status:** Stage 1, open. Feature tiers agreed 2026-09-10 (D1). Control inventory frozen (D2).
+**Status:** Stage 1 closed 2026-09-10; Stage 2 active. Feature tiers agreed (D1).
+Control inventory frozen (D2). Mechanical geometry provisional (D9).
 **Owner:** both team members. Changes require a new entry in `DECISIONS.md`.
 
 ---

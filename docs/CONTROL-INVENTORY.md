@@ -72,10 +72,17 @@ Comfortably within the candidate MCU's usable GPIO after strapping and flash/PSR
 
 **Consequence: every control is wired directly to its own pin.** No key matrix, no shift registers, no external ADC, no analog multiplexer. A matrix would only add diodes and ghosting problems to solve a pin shortage that does not exist.
 
+**Dev-board caveat (Stage 2):** on ESP32-S3 modules with octal SPI PSRAM (the R8
+and R16V variants), GPIO35, 36 and 37 are connected to the PSRAM and are not
+available for other uses, per the ESP32-S3-WROOM-1 datasheet. Roughly 23-24 header
+pins then remain usable against the 21 signals needed: it fits, with little margin.
+This firmware requires no PSRAM, so the production module should be a variant
+without octal PSRAM in order to recover those pins.
+
 ## 5. Open items
 
-- **D2a — stick arrangement:** symmetric (PlayStation) or offset (Xbox). Decided on the physical mockup; sets PCB outline and grip angle.
-- **Stick and trigger modules:** to be selected in Stage 2 from controller-repair replacement parts, with real dimensions, before the mockup is finalised. Analog trigger assemblies are the hardest mechanical part of this device and will not be designed from scratch.
+- **D2a — stick arrangement:** symmetric (PlayStation) or offset (Xbox). Deferred by D9 to the pre-PCB mechanical gate. Must be closed before any PCB outline work.
+- **Stick and trigger modules:** to be selected in Stage 2 from controller-repair replacement parts, with real dimensions, before the ergonomic validation required by D9. Analog trigger assemblies are the hardest mechanical part of this device and will not be designed from scratch.
 - **Physical placement** of Start, Select and Profile around the screen: set by the mockup.
 
 ## 6. Pin assignment
