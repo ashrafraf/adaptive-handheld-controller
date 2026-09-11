@@ -4,7 +4,7 @@ A custom handheld controller and second screen for Windows, whose buttons, stick
 
 The PC does all computation. The handheld provides physical controls, on-device profiles, and a ~5-inch touchscreen that Windows treats as a real second monitor.
 
-**Status: Stage 1 of 16 — project definition. No hardware purchased. No prototype built.**
+**Status: Stage 2 of 15 — controller input + USB HID prototype.**
 
 ---
 
@@ -39,16 +39,21 @@ Windows GPU -> HDMI -> driver board -> ~5in panel; touch -> USB
 
 Stage-gated. Each stage closes on a definition of done backed by a logged test result, not on a date. Subsystems are proven independently before integration.
 
-| Stage | | Stage | |
-|---|---|---|---|
-| 1 | Project definition | 9 | PCB assembly and bring-up |
-| 2 | Layout mockup + input prototype | 10 | Firmware V1 |
-| 3 | USB HID firmware | 11 | Companion app V1 |
-| 4 | Display subsystem prototype | 12 | Enclosure |
-| 5 | Companion app prototype | 13 | System integration |
-| 6 | Practice PCB | 14 | Optional features |
-| 7 | Main PCB requirements | 15 | Final validation |
-| 8 | Main PCB design | 16 | Documentation and demo |
+1. Project definition (closed 2026-09-10)
+2. Controller input + USB HID prototype  <- ACTIVE
+3. Display subsystem prototype
+4. Companion application prototype + configuration protocol
+5. Practice PCB
+6. Mechanical/ergonomic validation + main PCB requirements and pin map
+7. Main PCB design
+8. PCB assembly and bring-up
+9. Firmware V1
+10. Companion application V1
+11. Enclosure
+12. System integration
+13. Optional features
+14. Final validation
+15. Documentation and demo
 
 ## Repository layout
 

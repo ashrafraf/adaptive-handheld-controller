@@ -35,13 +35,15 @@ Full entries with reasoning live in `docs/DECISIONS.md`. Summary:
 |---|---|---|
 | D1 | V1 feature tiers as recorded in `docs/V1-SPEC.md` | Agreed |
 | D2 | Control inventory: 15 digital inputs + 6 analog channels | Frozen (sub-decision D2a open) |
-| D2a | Stick arrangement: symmetric (PS) vs offset (Xbox) | **OPEN** — decided on the physical mockup |
+| D2a | Stick arrangement: symmetric (PS) vs offset (Xbox) | **OPEN** — deferred by D9 to the pre-PCB mechanical gate |
 | D3 | Display: HDMI driver board + off-the-shelf ~5in panel; no Linux SBC in V1 | Agreed |
 | D4 | Connection: wired USB-C only in V1; wireless is OPTIONAL, post-core | Agreed |
 | D5 | Power: USB bus-powered, no internal battery in V1 | Agreed, pending Stage 4 current measurement |
 | D6 | MCU family: ESP32-S3 | **PROVISIONAL** — see below |
 | D7 | Host identity: composite USB HID (gamepad + keyboard + mouse + config interface) | Agreed |
 | D8 | Repository and documentation structure | Agreed |
+| D9 | Ergonomic validation deferred to a pre-PCB mechanical gate | Agreed |
+| D10 | Stage plan revision: merge old Stages 2-3, renumber to 15 stages | Proposed |
 
 **D6 is provisional.** ESP32-S3 is confirmed only when a Stage 3 prototype demonstrates a stable composite USB HID device on Windows — a working gamepad interface, a working keyboard/mouse interface, and a working vendor configuration interface, simultaneously, surviving reconnect. Until that test passes, do not treat ESP32-S3 as final and do not create artifacts that would be expensive to port (custom PCB layout, production BOM). Documented fallback: RP2040 with an external ADC or analog multiplexer.
 
@@ -76,9 +78,23 @@ Authoritative list in `docs/V1-SPEC.md`. Enforce these boundaries.
 
 Work proceeds one stage at a time. A stage closes only when its definition of done is met and evidence is recorded in `docs/TEST-LOG.md`. Stages are gated on completion, not on dates.
 
-1. Project definition · 2. Control layout mockup + input prototype · 3. USB HID firmware · 4. Display subsystem prototype · 5. Companion app prototype + config protocol · 6. Practice PCB (real button sub-board) · 7. Main PCB requirements + pin map · 8. Main PCB design · 9. PCB assembly and bring-up · 10. Firmware V1 · 11. Companion app V1 · 12. Enclosure · 13. System integration · 14. Optional features · 15. Final validation · 16. Documentation and demo
+1. Project definition (closed 2026-09-10)
+2. Controller input + USB HID prototype  <- ACTIVE
+3. Display subsystem prototype
+4. Companion application prototype + configuration protocol
+5. Practice PCB
+6. Mechanical/ergonomic validation + main PCB requirements and pin map
+7. Main PCB design
+8. PCB assembly and bring-up
+9. Firmware V1
+10. Companion application V1
+11. Enclosure
+12. System integration
+13. Optional features
+14. Final validation
+15. Documentation and demo
 
-**Current stage: 1 (open).**
+**Current stage: 2 — controller input + USB HID prototype.**
 
 ## 8. Subsystems and dependencies
 
@@ -94,7 +110,8 @@ Work proceeds one stage at a time. A stage closes only when its definition of do
 Dependency rules, enforced:
 
 - No main PCB layout until S1 and S2 are proven on development hardware.
-- No pin map until the control inventory is frozen (it is) and D2a is closed.
+- No pin map until the control inventory is frozen (it is) and the MCU is confirmed (D6).
+- No main PCB outline, control mounting position, or enclosure geometry frozen, and no PCB ordered, until the physical ergonomic validation required by D9 has been performed and logged in docs/TEST-LOG.md.
 - No enclosure CAD until panel, driver board and PCB outline dimensions are physically measured.
 - No power component selection until measured current draw exists for MCU, panel and driver board.
 - No integration of display and controller until each works independently.
